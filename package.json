@@ -9,7 +9,7 @@
     "dev": "sass --watch styles.scss:styles.css",
     "build": "sass styles.scss styles.css --style=compressed"
   },
-  "devDependencies": {
+  "dependencies": {
     "sass": "^1.69.0"
   },
   "keywords": ["sass", "css", "frontend"],
