@@ -1,0 +1,36 @@
+// Colors
+$primary-dark: #182C61;
+$primary-light: #f5f6fa;
+$success: #44bd32;
+$success-hover: #4cd137;
+$white: #fff;
+
+// Typography
+$font-family: 'Roboto', sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Spacing
+$container-max-width: 1024px;
+$container-mobile-width: 80%;
+$header-padding: 16px;
+$section-padding: 56px;
+$menu-spacing: 24px;
+$product-spacing: 40px;
+$button-padding: 8px;
+$product-margin-mobile: 32px;
+
+// Border radius
+$border-radius-small: 8px;
+$border-radius-medium: 16px;
+
+// Grid settings
+$grid-columns-desktop: repeat(3, 1fr);
+$grid-columns-tablet: repeat(2, 1fr);
+$grid-gap-small: 20px;
+$grid-gap-medium: 25px;
+$grid-gap-large: 30px;
+
+// Breakpoints
+$tablet-max: 1023px;
+$mobile-max: 767px;

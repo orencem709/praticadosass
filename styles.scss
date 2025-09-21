@@ -1,0 +1,9 @@
+// Main SASS file that imports all modules
+@use 'variables';
+@use 'base';
+@use 'layout';
+@use 'header';
+@use 'products';
+@use 'auth';
+@use 'cart-filters';
+@use 'responsive';

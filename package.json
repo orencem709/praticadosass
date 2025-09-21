@@ -1,0 +1,18 @@
+{
+  "name": "pratica-sass",
+  "version": "1.0.0",
+  "description": "Proyecto de práctica con SASS",
+  "main": "index.html",
+  "scripts": {
+    "sass": "sass styles.scss styles.css",
+    "sass:watch": "sass --watch styles.scss:styles.css",
+    "dev": "sass --watch styles.scss:styles.css",
+    "build": "sass styles.scss styles.css --style=compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  },
+  "keywords": ["sass", "css", "frontend"],
+  "author": "",
+  "license": "MIT"
+}

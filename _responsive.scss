@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+@media screen and (max-width: $tablet-max) {
+    .container {
+        max-width: $container-mobile-width;
+    }
+
+    .products {
+        grid-template-columns: $grid-columns-tablet;
+        gap: $grid-gap-medium;
+    }
+}
+
+@media screen and (max-width: $mobile-max) {
+    .products {
+        grid-template-columns: 1fr;
+        gap: $grid-gap-small;
+    }
+
+    .product-item {
+        margin-bottom: $product-margin-mobile;
+    }
+}

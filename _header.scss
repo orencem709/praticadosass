@@ -1,0 +1,132 @@
+@use 'variables' as *;
+
+header {
+    background-color: $primary-dark;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $header-padding 0;
+    }
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid $white;
+    }
+
+    .brand-text {
+        h1 {
+            color: $white;
+            font-size: 1.8em;
+            font-weight: $font-weight-bold;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85em;
+            margin: 0;
+            font-style: italic;
+        }
+    }
+}
+
+.menu {
+    display: flex;
+
+    li {
+        font-weight: $font-weight-bold;
+        margin-left: $menu-spacing;
+
+        a {
+            color: $white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: $border-radius-small;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+// Responsive para header
+@media screen and (max-width: $tablet-max) {
+    .branding {
+        .brand-text {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .tagline {
+                font-size: 0.8em;
+            }
+        }
+    }
+
+    .menu {
+        li {
+            margin-left: 15px;
+
+            a {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-max) {
+    header .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .branding {
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .brand-text {
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .tagline {
+                display: none;
+            }
+        }
+    }
+
+    .menu {
+        li {
+            margin-left: 10px;
+
+            a {
+                padding: 5px 8px;
+                font-size: 0.85em;
+            }
+        }
+    }
+}

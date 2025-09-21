@@ -1,0 +1,150 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+// Estilos para los modales
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: $white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: $border-radius-medium;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: modalFadeIn 0.3s ease-out;
+
+    h2 {
+        color: $primary-dark;
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: $font-weight-bold;
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Botón de cerrar modal
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover,
+    &:focus {
+        color: $primary-dark;
+    }
+}
+
+// Estilos del formulario de login
+.login-form {
+    .form-group {
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: $primary-dark;
+            font-weight: $font-weight-bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: $border-radius-small;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: $font-family;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-dark;
+                box-shadow: 0 0 0 3px rgba(24, 44, 97, 0.1);
+            }
+
+            &:invalid {
+                border-color: #e74c3c;
+            }
+        }
+    }
+}
+
+// Botón de login
+.login-button {
+    width: 100%;
+    background-color: $primary-dark;
+    color: $white;
+    padding: 15px;
+    border: none;
+    border-radius: $border-radius-small;
+    font-size: 16px;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+
+    &:hover {
+        background-color: color.adjust($primary-dark, $lightness: 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(24, 44, 97, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// Link de registro
+.register-link {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+
+    a {
+        color: $primary-dark;
+        text-decoration: none;
+        font-weight: $font-weight-bold;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: color.adjust($primary-dark, $lightness: 15%);
+            text-decoration: underline;
+        }
+    }
+}
+
+// Estilos responsive para modales
+@media screen and (max-width: $mobile-max) {
+    .modal-content {
+        margin: 10% auto;
+        padding: 25px 20px;
+        width: 95%;
+    }
+}
