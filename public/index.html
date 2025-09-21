@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Tu tienda de tecnología</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=32&h=32&fit=crop" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="branding">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=70&fit=crop" alt="TechStore Logo" class="logo" />
+                <div class="brand-text">
+                    <h1>TechStore</h1>
+                    <p class="tagline">Tu tienda de tecnología</p>
+                </div>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <a href="#">Início</a>
+                    </li>
+                    <li>
+                        <a href="#">Produtos</a>
+                    </li>
+                    <li>
+                        <a href="#" id="loginBtn">Login</a>
+                    </li>
+                    <li>
+                        <a href="#" id="cartBtn" class="cart-btn">
+                            🛒 Carrito (<span id="cartCount">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-button">Ingresar</button>
+                <p class="register-link">
+                    ¿No tienes cuenta? <a href="#" id="registerLink">Regístrate aquí</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm" class="login-form">
+                <div class="form-group">
+                    <label for="regName">Nombre completo:</label>
+                    <input type="text" id="regName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Contraseña:</label>
+                    <input type="password" id="regPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar contraseña:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="login-button">Crear Cuenta</button>
+                <p class="register-link">
+                    ¿Ya tienes cuenta? <a href="#" id="loginLink">Inicia sesión aquí</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <h2>Productos de Tecnología</h2>
+            
+            <!-- Filtros de productos -->
+            <div class="filters-section">
+                <div class="search-filter">
+                    <input type="text" id="searchInput" placeholder="🔍 Buscar productos..." />
+                </div>
+                
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">Todos</button>
+                    <button class="filter-btn" data-category="smartphones">Smartphones</button>
+                    <button class="filter-btn" data-category="laptops">Laptops</button>
+                    <button class="filter-btn" data-category="audio">Audio</button>
+                    <button class="filter-btn" data-category="wearables">Wearables</button>
+                    <button class="filter-btn" data-category="tablets">Tablets</button>
+                    <button class="filter-btn" data-category="cameras">Cámaras</button>
+                </div>
+                
+                <div class="price-filter">
+                    <label for="priceRange">Precio máximo: <span id="priceValue">$2000</span></label>
+                    <input type="range" id="priceRange" min="0" max="2000" value="2000" step="100">
+                </div>
+            </div>
+            
+            <ul class="products">
+                <li class="product-item" data-product="1" data-category="smartphones" data-price="999">
+                    <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=400&fit=crop" alt="Smartphone Pro Max" />
+                    <h4>Smartphone Pro Max</h4>
+                    <p class="product-price">$999.99</p>
+                    <p>
+                        Smartphone de última generación con cámara triple de 48MP, procesador A17 y pantalla OLED de 6.7"
+                    </p>
+                    <a href="#" class="product-button" onclick="showProductDetails(1)">
+                        Ver detalles
+                    </a>
+                    <button class="add-to-cart-simple" onclick="addToCart(1)">
+                        🛒 Agregar al carrito
+                    </button>
+                </li>
+                <li class="product-item" data-product="2" data-category="laptops" data-price="1499">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop" alt="Laptop Gaming Pro" />
+                    <h4>Laptop Gaming Pro</h4>
+                    <p class="product-price">$1,499.99</p>
+                    <p>
+                        Laptop gamer con RTX 4070, Intel i7 de 13va gen, 32GB RAM y SSD de 1TB para máximo rendimiento
+                    </p>
+                    <a href="#" class="product-button" onclick="showProductDetails(2)">
+                        Ver detalles
+                    </a>
+                    <button class="add-to-cart-simple" onclick="addToCart(2)">
+                        🛒 Agregar al carrito
+                    </button>
+                </li>
+                <li class="product-item" data-product="3" data-category="audio" data-price="299">
+                    <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400&h=400&fit=crop" alt="Auriculares Bluetooth Premium" />
+                    <h4>Auriculares Bluetooth Premium</h4>
+                    <p class="product-price">$299.99</p>
+                    <p>
+                        Auriculares inalámbricos con cancelación activa de ruido, 30 horas de batería y sonido Hi-Fi
+                    </p>
+                    <a href="#" class="product-button" onclick="showProductDetails(3)">
+                        Ver detalles
+                    </a>
+                    <button class="add-to-cart-simple" onclick="addToCart(3)">
+                        🛒 Agregar al carrito
+                    </button>
+                </li>
+                <li class="product-item" data-product="4" data-category="wearables" data-price="449">
+                    <img src="https://images.unsplash.com/photo-1592659762303-90081d34b277?w=400&h=400&fit=crop" alt="Smart Watch Ultra" />
+                    <h4>Smart Watch Ultra</h4>
+                    <p class="product-price">$449.99</p>
+                    <p>
+                        Reloj inteligente con GPS, monitor de salud avanzado, resistencia al agua y batería de 7 días
+                    </p>
+                    <a href="#" class="product-button" onclick="showProductDetails(4)">
+                        Ver detalles
+                    </a>
+                    <button class="add-to-cart-simple" onclick="addToCart(4)">
+                        🛒 Agregar al carrito
+                    </button>
+                </li>
+                <li class="product-item" data-product="5" data-category="tablets" data-price="1099">
+                    <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop" alt="Tablet Pro 12.9" />
+                    <h4>Tablet Pro 12.9"</h4>
+                    <p class="product-price">$1,099.99</p>
+                    <p>
+                        Tablet profesional con pantalla Liquid Retina, chip M2, soporte para Apple Pencil y teclado mágico
+                    </p>
+                    <a href="#" class="product-button" onclick="showProductDetails(5)">
+                        Ver detalles
+                    </a>
+                    <button class="add-to-cart-simple" onclick="addToCart(5)">
+                        🛒 Agregar al carrito
+                    </button>
+                </li>
+                <li class="product-item" data-product="6" data-category="cameras" data-price="1299">
+                    <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=400&fit=crop" alt="Cámara DSLR 4K" />
+                    <h4>Cámara DSLR 4K</h4>
+                    <p class="product-price">$1,299.99</p>
+                    <p>
+                        Cámara profesional con sensor full-frame, grabación 4K, estabilización óptica y lente 24-70mm
+                    </p>
+                    <a href="#" class="product-button" onclick="showProductDetails(6)">
+                        Ver detalles
+                    </a>
+                    <button class="add-to-cart-simple" onclick="addToCart(6)">
+                        🛒 Agregar al carrito
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Modal de Detalles del Producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content product-modal-content">
+            <span class="close" onclick="closeProductModal()">&times;</span>
+            <div class="product-detail">
+                <div class="product-detail-image">
+                    <img id="productDetailImg" src="" alt="">
+                </div>
+                <div class="product-detail-info">
+                    <h2 id="productDetailName"></h2>
+                    <p class="product-detail-price" id="productDetailPrice"></p>
+                    <div class="product-detail-description" id="productDetailDescription"></div>
+                    <div class="product-features" id="productFeatures"></div>
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn">Agregar al Carrito</button>
+                        <button class="buy-now-btn">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito de Compras -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-modal-content">
+            <span class="close" onclick="closeCartModal()">&times;</span>
+            <h2>🛒 Carrito de Compras</h2>
+            <div id="cartItems" class="cart-items">
+                <!-- Los productos del carrito se agregarán aquí dinámicamente -->
+            </div>
+            <div class="cart-summary">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <div class="cart-actions">
+                    <button class="clear-cart-btn" onclick="clearCart()">Vaciar Carrito</button>
+                    <button class="checkout-btn" onclick="checkout()">Proceder al Pago</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Referencias a elementos del DOM
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const registerLink = document.getElementById('registerLink');
+        const loginLink = document.getElementById('loginLink');
+        const closeBtns = document.querySelectorAll('.close');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        
+        // Referencias del carrito
+        const cartBtn = document.getElementById('cartBtn');
+        const cartModal = document.getElementById('cartModal');
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        
+        // Referencias de filtros
+        const searchInput = document.getElementById('searchInput');
+        const categoryBtns = document.querySelectorAll('.filter-btn');
+        const priceRange = document.getElementById('priceRange');
+        const priceValue = document.getElementById('priceValue');
+        
+        // Variables del carrito
+        let cart = [];
+        let currentCategory = 'all';
+        let currentMaxPrice = 2000;
+
+        // Abrir modal de login
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'block';
+        });
+        
+        // Abrir modal del carrito
+        cartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCartModal();
+        });
+
+        // Cambiar a modal de registro
+        registerLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'block';
+        });
+
+        // Cambiar a modal de login
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'block';
+        });
+
+        // Cerrar modales
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+
+        // Cerrar modal al hacer clic fuera
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+        });
+
+        // Manejar envío de formulario de login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Aquí puedes agregar la lógica de autenticación
+            alert(`Intento de login con: ${email}`);
+            loginModal.style.display = 'none';
+        });
+
+        // Manejar envío de formulario de registro
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            // Aquí puedes agregar la lógica de registro
+            alert(`Cuenta creada para: ${name} (${email})`);
+            registerModal.style.display = 'none';
+        });
+
+        // === FUNCIONES DEL CARRITO ===
+        
+        // Agregar producto al carrito
+        function addToCart(productId) {
+            const product = productsData[productId];
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: parseFloat(product.price.replace('$', '').replace(',', '')),
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            updateCartCount();
+            showCartNotification(product.name);
+        }
+        
+        // Mostrar modal del carrito
+        function showCartModal() {
+            updateCartDisplay();
+            cartModal.style.display = 'block';
+        }
+        
+        // Cerrar modal del carrito
+        function closeCartModal() {
+            cartModal.style.display = 'none';
+        }
+        
+        // Actualizar contador del carrito
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+        
+        // Actualizar visualización del carrito
+        function updateCartDisplay() {
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
+                cartTotal.textContent = '0.00';
+                return;
+            }
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                    </div>
+                    <div class="cart-item-total">$${itemTotal.toFixed(2)}</div>
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">🗑️</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            cartTotal.textContent = total.toFixed(2);
+        }
+        
+        // Actualizar cantidad de un producto
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartDisplay();
+                    updateCartCount();
+                }
+            }
+        }
+        
+        // Remover producto del carrito
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+            updateCartCount();
+        }
+        
+        // Vaciar carrito
+        function clearCart() {
+            if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+                cart = [];
+                updateCartDisplay();
+                updateCartCount();
+            }
+        }
+        
+        // Proceder al pago
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            alert(`Procesando pago por $${total.toFixed(2)}...\n\nGracias por tu compra!`);
+            
+            // Vaciar carrito después del "pago"
+            cart = [];
+            updateCartDisplay();
+            updateCartCount();
+            closeCartModal();
+        }
+        
+        // Mostrar notificación de producto agregado
+        function showCartNotification(productName) {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.textContent = `${productName} agregado al carrito`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 2000);
+        }
+        
+        // === FUNCIONES DE FILTROS ===
+        
+        // Inicializar filtros
+        function initializeFilters() {
+            // Filtro de búsqueda
+            searchInput.addEventListener('input', filterProducts);
+            
+            // Filtros de categoría
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentCategory = e.target.dataset.category;
+                    filterProducts();
+                });
+            });
+            
+            // Filtro de precio
+            priceRange.addEventListener('input', (e) => {
+                currentMaxPrice = parseInt(e.target.value);
+                priceValue.textContent = `$${currentMaxPrice}`;
+                filterProducts();
+            });
+        }
+        
+        // Filtrar productos
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const products = document.querySelectorAll('.product-item');
+            
+            products.forEach(product => {
+                const productName = product.querySelector('h4').textContent.toLowerCase();
+                const productCategory = product.dataset.category;
+                const productPrice = parseInt(product.dataset.price);
+                
+                const matchesSearch = productName.includes(searchTerm);
+                const matchesCategory = currentCategory === 'all' || productCategory === currentCategory;
+                const matchesPrice = productPrice <= currentMaxPrice;
+                
+                if (matchesSearch && matchesCategory && matchesPrice) {
+                    product.style.display = 'block';
+                    product.style.animation = 'fadeIn 0.3s ease';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Datos de productos para los detalles
+        const productsData = {
+            1: {
+                name: "Smartphone Pro Max",
+                price: "$999.99",
+                image: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=600&h=600&fit=crop",
+                description: "El smartphone más avanzado de la serie Pro, diseñado para profesionales y entusiastas de la tecnología.",
+                features: [
+                    "📱 Pantalla OLED Super Retina XDR de 6.7 pulgadas",
+                    "📸 Sistema de cámara triple profesional de 48MP",
+                    "⚡ Chip A17 Pro con GPU de 6 núcleos",
+                    "🔋 Batería de hasta 29 horas de reproducción de video",
+                    "💧 Resistente al agua IP68",
+                    "📶 5G ultra rápido"
+                ]
+            },
+            2: {
+                name: "Laptop Gaming Pro",
+                price: "$1,499.99",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop",
+                description: "Laptop de gaming de alto rendimiento para los jugadores más exigentes y creadores de contenido.",
+                features: [
+                    "🎮 NVIDIA GeForce RTX 4070 8GB GDDR6",
+                    "💻 Intel Core i7-13700H 13va generación",
+                    "🧠 32GB DDR5 RAM de alta velocidad",
+                    "💾 SSD NVMe de 1TB ultra rápido",
+                    "🖥️ Pantalla 15.6\" 144Hz QHD",
+                    "❄️ Sistema de enfriamiento avanzado"
+                ]
+            },
+            3: {
+                name: "Auriculares Bluetooth Premium",
+                price: "$299.99",
+                image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&h=600&fit=crop",
+                description: "Auriculares inalámbricos premium con la mejor cancelación de ruido del mercado.",
+                features: [
+                    "🎧 Cancelación activa de ruido líder en la industria",
+                    "🔋 30 horas de batería total con estuche",
+                    "🎵 Audio Hi-Res con drivers de 40mm",
+                    "📞 Micrófono dual para llamadas cristalinas",
+                    "💧 Resistentes al sudor IPX4",
+                    "📱 Conectividad multipunto"
+                ]
+            },
+            4: {
+                name: "Smart Watch Ultra",
+                price: "$449.99",
+                image: "https://images.unsplash.com/photo-1592659762303-90081d34b277?w=600&h=600&fit=crop",
+                description: "El reloj inteligente más completo para deportistas y profesionales de la salud.",
+                features: [
+                    "⌚ Pantalla Always-On Retina de 49mm",
+                    "🗺️ GPS de doble frecuencia ultra preciso",
+                    "❤️ Monitor de salud 24/7 completo",
+                    "🏊 Resistente al agua hasta 100 metros",
+                    "🔋 Batería de hasta 7 días",
+                    "🏃 Más de 100 modos de entrenamiento"
+                ]
+            },
+            5: {
+                name: "Tablet Pro 12.9\"",
+                price: "$1,099.99",
+                image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=600&fit=crop",
+                description: "Tablet profesional diseñada para creativos, estudiantes y profesionales.",
+                features: [
+                    "📱 Pantalla Liquid Retina XDR de 12.9\"",
+                    "🚀 Chip M2 de 8 núcleos",
+                    "✏️ Compatible con Apple Pencil de 2da gen",
+                    "⌨️ Magic Keyboard magnético",
+                    "📷 Cámara TrueDepth frontal de 12MP",
+                    "💾 Hasta 2TB de almacenamiento"
+                ]
+            },
+            6: {
+                name: "Cámara DSLR 4K",
+                price: "$1,299.99",
+                image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&h=600&fit=crop",
+                description: "Cámara profesional DSLR para fotógrafos y videógrafos profesionales.",
+                features: [
+                    "📸 Sensor full-frame CMOS de 45.7MP",
+                    "🎥 Grabación 4K UHD a 60fps",
+                    "🔄 Estabilización óptica de 5 ejes",
+                    "🔍 Enfoque automático de 693 puntos",
+                    "🌟 ISO nativo hasta 51,200",
+                    "📦 Incluye lente 24-70mm f/2.8"
+                ]
+            }
+        };
+
+        // Función para mostrar detalles del producto
+        function showProductDetails(productId) {
+            const product = productsData[productId];
+            const modal = document.getElementById('productModal');
+            
+            // Actualizar contenido del modal
+            document.getElementById('productDetailImg').src = product.image;
+            document.getElementById('productDetailImg').alt = product.name;
+            document.getElementById('productDetailName').textContent = product.name;
+            document.getElementById('productDetailPrice').textContent = product.price;
+            document.getElementById('productDetailDescription').textContent = product.description;
+            
+            // Agregar características
+            const featuresContainer = document.getElementById('productFeatures');
+            featuresContainer.innerHTML = '<h3>Características:</h3><ul>' + 
+                product.features.map(feature => `<li>${feature}</li>`).join('') + 
+                '</ul>';
+            
+            // Actualizar botones con el ID del producto
+            const addToCartBtn = document.querySelector('.add-to-cart-btn');
+            const buyNowBtn = document.querySelector('.buy-now-btn');
+            
+            addToCartBtn.onclick = () => {
+                addToCart(productId);
+                closeProductModal();
+            };
+            
+            buyNowBtn.onclick = () => {
+                addToCart(productId);
+                closeProductModal();
+                showCartModal();
+            };
+            
+            // Mostrar modal
+            modal.style.display = 'block';
+        }
+
+        // Función para cerrar modal de productos
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        // Cerrar modal de producto al hacer clic fuera
+        window.addEventListener('click', (e) => {
+            const productModal = document.getElementById('productModal');
+            if (e.target === productModal) {
+                productModal.style.display = 'none';
+            }
+        });
+        
+        // Inicializar filtros al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFilters();
+        });
+    </script>
+</body>
+</html>
